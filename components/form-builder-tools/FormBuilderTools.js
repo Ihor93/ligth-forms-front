@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import styles from "./formBuilderTools.module.css";
-import {FormBuilderContext} from "../../../utils/context";
+import {FormBuilderContext} from "../../utils/context";
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';

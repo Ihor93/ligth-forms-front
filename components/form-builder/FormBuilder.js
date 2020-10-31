@@ -3,7 +3,7 @@ import {FormBuilderTools} from "../form-builder-tools/FormBuilderTools";
 import {FormBuilderBody} from "../form-builder-body/FormBuilderBody";
 import {FormBuilderConfig} from "../form-builder-config/FormBuilderConfig";
 import styles from "./formBuilder.module.css";
-import {FormBuilderContext} from "../../../utils/context";
+import {FormBuilderContext} from "../../utils/context";
 
 export function FormBuilder() {
     const [formElements, setFormElements] = useState([]);

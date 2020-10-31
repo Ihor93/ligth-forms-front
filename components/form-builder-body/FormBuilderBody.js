@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {FormBuilderContext} from "../../../utils/context";
+import {FormBuilderContext} from "../../utils/context";
 import styles from "./FormBuilderBody.module.css"
 import {SortContainer} from "../sort/SortContainer";
 import {SortItem} from "../sort/SortItem";

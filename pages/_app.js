@@ -1,7 +1,7 @@
 import React from "react"
 import '../styles/globals.css'
 import Head from "next/head";
-import {Header} from "./components/header/header";
+import {Header} from "../components/header/header";
 
 function MyApp({Component, pageProps}) {
     return (

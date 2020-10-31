@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import {FormBuilder} from "./components/form-builder/FormBuilder";
+import {FormBuilder} from "../components/form-builder/FormBuilder";
 
 export default function Home() {
   return (
