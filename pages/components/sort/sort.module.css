@@ -1,0 +1,6 @@
+.dragAreaHold {
+    position: absolute;
+}
+.dragArea {
+    position: static;
+}
