@@ -2,38 +2,35 @@ import React, {useContext} from "react";
 import {FormBuilderContext} from "../../utils/context";
 import styles from "./FormBuilderBody.module.css"
 import {SortContainer} from "../sort/SortContainer";
-import {SortItem} from "../sort/SortItem";
 
 const elementRenderer = {
     'inputText': (el, k) => {
         return (
-          <SortItem className={styles.inputTextRoot} key={k}>
-              <div className={styles.inputTextLabel}>{el.label || el.name}</div>
-              <div className={styles.inputText}/>
-          </SortItem>
+            <div className={styles.inputTextRoot} key={k}>
+                <div className={styles.inputTextLabel}>{el.label || el.name}</div>
+                <div className={styles.inputText}/>
+            </div>
         );
     },
-    'inputDate' : (el, k) => {
+    'inputDate': (el, k) => {
         return (
-            <SortItem className={styles.inputDateRoot} key={k}>
+            <div className={styles.inputDateRoot} key={k}>
                 <div className={styles.inputDateLabel}>{el.label || el.name}</div>
                 <div className={styles.inputDate}>DD/MM/YYYY</div>
-            </SortItem>
+            </div>
         );
     },
-    'inputTime' : (el, k) => {
+    'inputTime': (el, k) => {
         return (
-            <SortItem className={styles.inputDateRoot} key={k}>
+            <div className={styles.inputDateRoot} key={k}>
                 <div className={styles.inputDateLabel}>{el.label || el.name}</div>
                 <div className={styles.inputDate}>DD/MM/YYYY</div>
-            </SortItem>
+            </div>
         );
     },
-    'divider' : (el, k) => {
+    'divider': (el, k) => {
         return (
-            <SortItem>
-                <hr className={styles.divider} key={k}/>
-            </SortItem>
+            <hr className={styles.divider} key={k}/>
         )
     }
 };
@@ -43,9 +40,14 @@ export function FormBuilderBody() {
     const {formElements, selectEl} = useContext(FormBuilderContext);
     return (
         <div className={styles.root}>
-            <SortContainer className={styles.container}>
-                {formElements.map((el, k) => elementRenderer[el.type](el, k))}
-            </SortContainer>
+            <SortContainer
+                className={styles.container}
+                items={formElements.map((el, k) => {
+                    return {
+                        ...el,
+                        children: elementRenderer[el.type](el, k)
+                    }
+                })}/>
         </div>
     );
 }
