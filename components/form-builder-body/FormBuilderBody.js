@@ -37,11 +37,18 @@ const elementRenderer = {
 
 
 export function FormBuilderBody() {
-    const {formElements, selectEl} = useContext(FormBuilderContext);
+    const {formElements, selectFormElement, replaceElement, selectedEl} = useContext(FormBuilderContext);
+    const onSort = (before, id) => {
+      replaceElement(+before, +id);
+      console.log(before, id);
+    };
     return (
         <div className={styles.root}>
             <SortContainer
                 className={styles.container}
+                onSort={onSort}
+                onSelect={selectFormElement}
+                selectedEl={selectedEl}
                 items={formElements.map((el, k) => {
                     return {
                         ...el,

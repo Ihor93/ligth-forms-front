@@ -9,7 +9,7 @@ export function FormBuilder() {
     const [formElements, setFormElements] = useState([]);
     const [selectedEl, setSelectedEl] = useState(null);
     const removeFormElement = useCallback((id) => {
-        if (selectedEl && selectedEl.id === id) {
+        if (selectedEl && selectedEl === id) {
             setSelectedEl(null);
         }
         setFormElements(formElements.filter(i => i.id === id))
@@ -21,17 +21,24 @@ export function FormBuilder() {
         setSelectedEl(id);
     }, [setSelectedEl]);
     const replaceElement = useCallback((before, elementId) => {
-        const el = formElements.filter(i => i.id === elementId);
-        const elements = formElements.filter(i => i.id === elementId);
+        const el = formElements.find(i => i.id === elementId);
+        const elements = formElements.filter(i => i.id !== elementId);
+        let res;
         if (before) {
             const beforeIndex = elements.findIndex(i => i.id === before);
             elements.splice(beforeIndex, 0, el);
-            setFormElements(elements);
+            res = elements;
         } else {
-            setFormElements([...elements, el]);
+            res = [...elements, el];
         }
+        setFormElements(res);
     }, [formElements]);
-    const context = {formElements, removeFormElement, addFormElement, selectFormElement, selectedEl, replaceElement};
+    const updateElementConfig = (configs) => {
+        const element = formElements.find(i => i.id === selectedEl);
+        element.configs = {...element.configs, ...configs};
+        setFormElements([...formElements])
+    };
+    const context = {formElements, removeFormElement, addFormElement, selectFormElement, selectedEl, replaceElement, updateElementConfig};
     return (
         <div className={styles.root}>
             <FormBuilderContext.Provider value={context}>
