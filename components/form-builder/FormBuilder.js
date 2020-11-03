@@ -1,9 +1,9 @@
-import React, {useCallback, useMemo, useState} from "react";
-import {FormBuilderTools} from "../form-builder-tools/FormBuilderTools";
-import {FormBuilderBody} from "../form-builder-body/FormBuilderBody";
-import {FormBuilderConfig} from "../form-builder-config/FormBuilderConfig";
-import styles from "./formBuilder.module.css";
-import {FormBuilderContext} from "../../utils/context";
+import React, {useCallback, useState} from 'react';
+import {FormBuilderTools} from '../form-builder-tools/FormBuilderTools';
+import {FormBuilderBody} from '../form-builder-body/FormBuilderBody';
+import {FormBuilderConfig} from '../form-builder-config/FormBuilderConfig';
+import styles from './formBuilder.module.css';
+import {FormBuilderContext} from '../../utils/context';
 
 export function FormBuilder() {
     const [formElements, setFormElements] = useState([]);
@@ -12,10 +12,14 @@ export function FormBuilder() {
         if (selectedEl && selectedEl === id) {
             setSelectedEl(null);
         }
-        setFormElements(formElements.filter(i => i.id === id))
+        setFormElements(formElements.filter(i => i.id !== id));
     }, [setFormElements]);
     const addFormElement = useCallback((el) => {
-        setFormElements([].concat(formElements, el))
+        if (el.unique && formElements.find(i => i.type === el.type)) {
+            alert('This element can be only one');
+            return;
+        }
+        setFormElements([].concat(formElements, el));
     }, [setFormElements, formElements]);
     const selectFormElement = useCallback(id => {
         setSelectedEl(id);
@@ -35,17 +39,17 @@ export function FormBuilder() {
     }, [formElements]);
     const updateElementConfig = (configs) => {
         const element = formElements.find(i => i.id === selectedEl);
-        element.configs = {...element.configs, ...configs};
-        setFormElements([...formElements])
+        element.config = {...element.config, ...configs};
+        setFormElements([...formElements]);
     };
     const context = {formElements, removeFormElement, addFormElement, selectFormElement, selectedEl, replaceElement, updateElementConfig};
     return (
         <div className={styles.root}>
             <FormBuilderContext.Provider value={context}>
-                <FormBuilderTools />
-                <FormBuilderBody />
-                <FormBuilderConfig />
+                <FormBuilderTools/>
+                <FormBuilderBody/>
+                <FormBuilderConfig/>
             </FormBuilderContext.Provider>
         </div>
-    )
+    );
 }

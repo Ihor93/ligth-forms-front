@@ -2,24 +2,27 @@ import React, {useContext, useMemo} from 'react';
 import {FormBuilderContext} from '../../utils/context';
 import cn from 'classnames';
 import styles from './formBuilderConfig.module.css';
+import {IsRequired} from './components/IsRequired';
+import {Validation} from './components/Validation';
+import {Label} from './components/Label';
 
+const inputValidations = ['', 'email', 'phone', 'number'];
 const configs = {
     'inputText': (el, onUpdate) => {
         const onChange = event => {
-            onUpdate({[event.currentTarget.name]: event.currentTarget.value});
+            onUpdate({[event.target.name]: event.target.value});
         };
+        const configs = el.config || {};
         return (
-            <div>
-                <label>
-                    <select name="validation" id="validation"
-                            onChange={onChange}>
-                        <option value="text">text</option>
-                        <option value="email">email</option>
-                        <option value="phone">phone</option>
-                        <option value="number">number</option>
-                        <option value="custom">custom</option>
-                    </select>
-                </label>
+            <div key={el.id}>
+                <Label onChange={onChange} defaultValue={configs.label}/>
+                <Validation
+                    defaultValue={configs.validation}
+                    canBeCustom
+                    items={inputValidations}
+                    onChange={onChange}
+                />
+                <IsRequired onChange={onUpdate}/>
             </div>
         );
     },
@@ -32,10 +35,11 @@ export function FormBuilderConfig() {
         return formElements.find(i => i.id === selectedEl);
     }, [selectedEl]);
     const className = cn(styles.root, {[styles.active]: selectedEl});
-    
+    const config = selectedEl && configs[el.type];
     return (
         <div className={className}>
-            {selectedEl ? configs[el.type](el, updateElementConfig) : null}
+            <h2 className={styles.title}>{el?.name}</h2>
+            {config && config(el, updateElementConfig)}
         </div>
     );
 }

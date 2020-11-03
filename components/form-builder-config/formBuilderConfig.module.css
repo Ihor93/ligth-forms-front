@@ -1,7 +1,15 @@
+.root {
+	opacity: 0;
+	transition: .3s;
+	width: 300px;
+	border-left: 1px solid rgba(42, 46, 46, 0.76);
+	padding-left: 16px;
+	padding-top: 16px;
+}
 .active {
 	opacity: 1;
 }
-.root {
-	opacity: 0;
-	transition: 0;
+
+.title {
+	margin-top: 0;
 }
