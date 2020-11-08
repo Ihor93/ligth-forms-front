@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {Checkbox, FormControlLabel} from '@material-ui/core';
 import {FormControlLabelClasses} from './classes';
 
 
-export function IsRequired({onChange}) {
+export function IsRequired({onChange, defaultChecked}) {
+    const checked = useMemo(() => defaultChecked, []);
     const changeHandler = event => {
         onChange({isRequired: event.target.checked});
     };
@@ -13,6 +14,7 @@ export function IsRequired({onChange}) {
                 classes={FormControlLabelClasses}
                 control={
                     <Checkbox
+                        defaultChecked={checked}
                         onChange={changeHandler}
                         name="isRequired"
                         inputProps={{'aria-label': 'Is required'}}

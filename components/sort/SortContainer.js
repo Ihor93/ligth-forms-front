@@ -1,8 +1,6 @@
 import React, {useMemo, useRef, useState} from 'react';
 import styles from './sort.module.css';
 import cn from 'classnames';
-import {IconButton} from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 function renderSortItem({id, children}, selectedEl, onItemMouseEnter, onItemMouseLeave, onItemMouseUp, removeFormElement) {
     const active = id === selectedEl;
@@ -15,11 +13,6 @@ function renderSortItem({id, children}, selectedEl, onItemMouseEnter, onItemMous
             <div className={styles.dragArea}>
                 {children}
             </div>
-            {active && (
-                <IconButton aria-label="delete" className={styles.deleteIcon} onClick={() => removeFormElement(id)}>
-                    <DeleteIcon />
-                </IconButton>
-            )}
         </div>
     );
 }

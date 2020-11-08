@@ -13,7 +13,7 @@ export function FormBuilder() {
             setSelectedEl(null);
         }
         setFormElements(formElements.filter(i => i.id !== id));
-    }, [setFormElements]);
+    }, [setFormElements, formElements, selectedEl]);
     const addFormElement = useCallback((el) => {
         if (el.unique && formElements.find(i => i.type === el.type)) {
             alert('This element can be only one');

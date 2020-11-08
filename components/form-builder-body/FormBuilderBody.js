@@ -86,7 +86,6 @@ export function FormBuilderBody() {
     const {formElements, selectFormElement, replaceElement, selectedEl, removeFormElement} = useContext(FormBuilderContext);
     const onSort = (before, id) => {
       replaceElement(+before, +id);
-      console.log(before, id);
     };
     return (
         <div className={styles.root}>
