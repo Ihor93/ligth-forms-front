@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../formBuilderConfig.module.css';
-import Button from '@material-ui/core/es/Button/Button';
+import {Button} from '@material-ui/core/';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {IsRequired} from './IsRequired';
 import {Validation} from './Validation';
