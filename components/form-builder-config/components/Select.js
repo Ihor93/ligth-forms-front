@@ -9,6 +9,7 @@ export function Select({onChange, label, name, items}) {
                 classes={FormControlLabelClasses}
                 control={
                     <MSelect
+                        defaultValue={""}
                         className={styles.inputRoot}
                         onChange={onChange}
                         name={name}

@@ -13,7 +13,7 @@ const configs = {
         return (
             <ConfigItem
                 onRemove={onRemove}
-                onChange={onUpdate}
+                onUpdate={onUpdate}
                 config={config}
                 validationItems={inputValidations}
             />
@@ -24,7 +24,7 @@ const configs = {
         return (
             <ConfigItem
                 onRemove={onRemove}
-                onChange={onUpdate}
+                onUpdate={onUpdate}
                 config={config}
                 validationItems={inputValidations}
             />

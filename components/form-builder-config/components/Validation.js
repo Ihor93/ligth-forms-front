@@ -1,6 +1,7 @@
 import React, {useState, useMemo} from 'react';
-import {FormControlLabel, MenuItem, Select, TextField } from '@material-ui/core';
+import {FormControlLabel, MenuItem, TextField } from '@material-ui/core';
 import {FormControlLabelClasses, styles} from './classes';
+import { Select } from "./Select"
 
 let id;
 
@@ -8,6 +9,12 @@ export function Validation({onChange, items, canBeCustom = false, defaultValue})
     const defValue = useMemo(() => defaultValue && defaultValue.hasOwnProperty('custom') && 'custom' || defaultValue || '', []);
     const [custom, setCustom] = useState(defValue === 'custom');
     const [customValue, setCustomValue] = useState(defaultValue ? defaultValue.custom || '' : '');
+    const validationItems = useMemo(() => {
+        if (canBeCustom) {
+            items.push('custom')
+        }
+        return items;
+    }, [items])
     const handleChange = (event) => {
       if (event.target.value === 'custom') {
           setCustom(true);
@@ -25,25 +32,14 @@ export function Validation({onChange, items, canBeCustom = false, defaultValue})
             onChange({target: {name: 'validation',value: {custom: value}}})
         }, 300);
     };
+
     return (
         <div>
-            <FormControlLabel
-                classes={FormControlLabelClasses}
-                control={
-                    <Select
-                        className={styles.inputRoot}
-                        displayEmpty
-                        onChange={handleChange}
-                        name='validation'
-                        defaultValue={defValue}
-                        inputProps={{'aria-label': "Validation"}}
-                    >
-                        {items.map((i, k) => <MenuItem value={i}
-                                                       key={i + k}>{i}</MenuItem>)}
-                        {canBeCustom && <MenuItem value="custom">custom</MenuItem>}
-                    </Select>
-                }
+            <Select
+                items={validationItems}
                 label="Validation - "
+                name="validation"
+                onChange={handleChange}
             />
             {
                 custom && (
