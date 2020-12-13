@@ -1,7 +1,7 @@
 import React from 'react';
-import { Select } from '../Select';
-import { mount} from 'enzyme';
-import { Select as MuSelect } from "@material-ui/core"
+import {Select} from '../Select';
+import {mount} from 'enzyme';
+import {Select as MuSelect} from "@material-ui/core"
 
 const mockProps = {
     onChange: jest.fn(),
@@ -24,7 +24,7 @@ describe('Check Select', () => {
     });
     it('It should call change handler', () => {
         const newValue = "value 2"
-        const mockEvent = { target: { name: mockProps.name, value: newValue } };
+        const mockEvent = {target: {name: mockProps.name, value: newValue}};
         input.at(0).simulate('change', mockEvent);
         expect(mockProps.onChange).toBeCalledWith(expect.objectContaining({
             target: expect.objectContaining({
